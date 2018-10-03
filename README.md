@@ -12,7 +12,9 @@ Starts dockerized instances of:
   - Elasticsearch
   - Kibana
 
-To run quick-deploy, clone this repo onto the machine on which you wish to run Elasticseach:
-```
-./quick-deploy.sh
-```
+To run: 
+1. Clone this repo onto the machine on which you wish to run Elasticseach
+    - `git clone git@github.com:EthanStrider/quick-deploy.git`
+2. Run the shell script
+    - `cd quick-deploy`
+    - `./quick-deploy.sh`
