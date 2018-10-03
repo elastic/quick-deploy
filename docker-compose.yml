@@ -10,7 +10,10 @@ services:
       - discovery.type=single-node
       - ELASTIC_PASSWORD=${ES_PASSWORD}
     ports: ['9200:9200']
-    networks: ['es-stack']
+    networks:
+      es-stack:
+        aliases:
+          - elasticsearch
     ulimits:
       memlock:
         soft: -1
@@ -31,7 +34,7 @@ services:
       - elasticsearch
     environment:
       SERVER_HOST: "0.0.0.0"
-      ELASTICSEARCH_URL: "http://es-stack:9200"
+      ELASTICSEARCH_URL: "http://elasticsearch:9200"
       ELASTICSEARCH_USERNAME: "elastic"
       ELASTICSEARCH_PASSWORD: ${ES_PASSWORD}
     ports: [ '5601:5601' ]
