@@ -77,13 +77,13 @@
 
   # Get current user
   - name: Get current user
-    shell: whoami
+    local_action: command whoami
     register: current_user
 
   # sudo usermod -aG docker ubuntu
   - name: Add remote "ubuntu" user to "docker" group
     user:
-      name: "{{current_user}}"
+      name: "{{current_user.stdout}}"
       group: docker
       append: yes
     tags:
