@@ -86,7 +86,7 @@
 
   # install latest version of docker-compose
   - name: Install docker-compose
-    shell: "sudo curl -L https://github.com/docker/compose/releases/download/{{DOCKER_COMPOSE_VERSION}}/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose"
+    shell: "sudo curl -L https://github.com/docker/compose/releases/download/{{docker_compose_version}}/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose"
     tags:
       - docker
 
