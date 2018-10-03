@@ -24,8 +24,9 @@ services:
     cap_add:
       - IPC_LOCK
 
-  sa-demo-kibana:
+  kibana:
     image: docker.elastic.co/kibana/kibana:6.4.0
+    container_name: kibana
     depends_on:
       - elasticsearch
     environment:
