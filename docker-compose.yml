@@ -2,7 +2,7 @@ version: '2.1'
 
 services:
   elasticsearch:
-    image: docker.elastic.co/elasticsearch/elasticsearch:${TAG}
+    image: docker.elastic.co/elasticsearch/elasticsearch:latest
     container_name: elasticsearch
     environment:
       - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
@@ -25,7 +25,7 @@ services:
       - IPC_LOCK
 
   sa-demo-kibana:
-    image: docker.elastic.co/sa/sa-demo-${DEMO_NAME}-kibana:${SA_DEMO_ENV}
+    image: docker.elastic.co/kibana/kibana:latest
     depends_on:
       - elasticsearch
     environment:

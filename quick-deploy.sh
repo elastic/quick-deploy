@@ -18,4 +18,4 @@ ansible-playbook ./bootstrap.yml -e docker_compose_version=$DOCKER_COMPOSE_VERSI
 #-------------------------
 # DEPLOY THE ELASTIC STACK
 #-------------------------
-docker-compose up -d
+sudo docker-compose up -d
