@@ -4,7 +4,7 @@
 # GET A PASSWORD
 #-------------------------
 read -p "Enter a password for logging into Elasticsearch and Kibana: " ELASTIC_PASSWORD
-echo "Setting... $ELASTIC_PASSWORD"
+export ELASTIC_PASSWORD=$ELASTIC_PASSWORD
 
 #-------------------------
 # BOOTSTRAP ANSIBLE
@@ -24,4 +24,4 @@ ansible-playbook ./bootstrap.yml -e docker_compose_version=$DOCKER_COMPOSE_VERSI
 #-------------------------
 # DEPLOY THE ELASTIC STACK
 #-------------------------
-sudo docker-compose up -d -e ES_PASSWORD=$ELASTIC_PASSWORD
+sudo docker-compose up -d --force-recreate
