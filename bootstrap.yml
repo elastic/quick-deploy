@@ -61,7 +61,7 @@
   - name: Install docker
     apt:
       name: docker-ce
-      state: latest
+      state: present
       update_cache: yes
     notify: Start docker on boot
     tags:
@@ -84,11 +84,11 @@
     tags:
       - docker
 
-  # sudo apt-get install docker-compose
+  # sudo apt-get install docker-compose=1.8.*
   - name: Install docker-compose
     apt:
-      name: docker-compose
-      state: latest
+      name: "docker-compose={{docker_compose_version}}"
+      state: present
       update_cache: yes
     tags:
       - docker
