@@ -1,0 +1,41 @@
+version: '2.1'
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:${TAG}
+    container_name: elasticsearch
+    environment:
+      - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
+      - bootstrap.memory_lock=true
+      - discovery.type=single-node
+      - ELASTIC_PASSWORD=${ES_PASSWORD:-changeme}
+    ports: ['9200:9200']
+    networks: ['stack']
+    ulimits:
+      memlock:
+        soft: -1
+        hard: -1
+      nofile:
+        soft: 65536
+        hard: 65536
+    mem_limit: 8g
+    ports:
+      - 9200:9200
+    cap_add:
+      - IPC_LOCK
+
+  sa-demo-kibana:
+    image: docker.elastic.co/sa/sa-demo-${DEMO_NAME}-kibana:${SA_DEMO_ENV}
+    depends_on:
+      - elasticsearch
+    environment:
+      SERVER_HOST: "0.0.0.0"
+      ELASTICSEARCH_URL: "http://es:9200"
+      ELASTICSEARCH_USERNAME: "elastic"
+      ELASTICSEARCH_PASSWORD: ${SA_DEMO_ES_PASSWORD:-changeme}
+    ports: [ '5601:5601' ]
+    networks: ['stack']
+
+networks:
+  sa-demo-net:
+    driver: bridge

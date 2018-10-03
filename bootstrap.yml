@@ -1,0 +1,116 @@
+---
+# Bootstrap script for Elastic Stack
+
+- hosts: localhost
+  connection: local
+  gather_facts: no
+  become: yes
+
+  tasks:
+  # make sure python is installed
+  - name: install python
+    raw: test -e /usr/bin/python || (apt -y update && apt install -y python-minimal)
+
+  # sudo apt-get install *
+  - name: Install docker packages
+    apt:
+      name: "{{ item }}"
+      state: present
+      update_cache: yes
+    with_items:
+      - apt-transport-https
+      - ca-certificates
+      - curl
+      - software-properties-common
+    tags:
+      - docker
+
+  # curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+  - name: Add Docker's official GPG key
+    apt_key:
+      url: https://download.docker.com/linux/ubuntu/gpg
+      state: present
+    tags:
+      - docker
+
+  # sudo apt-key fingerprint 0EBFCD88
+  - name: Verify that we have the key with the fingerprint
+    apt_key:
+      id: 0EBFCD88
+      state: present
+    tags:
+      - docker
+
+  # sudo add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable"
+  - name: Set up the stable repository
+    apt_repository:
+      repo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+      state: present
+      update_cache: yes
+    tags:
+      - docker
+
+  # sudo apt-get update
+  - name: Update apt packages
+    apt:
+      update_cache: yes
+    tags:
+      - docker
+
+  # sudo apt-get install docker-ce
+  - name: Install docker
+    apt:
+      name: docker-ce
+      state: present
+      update_cache: yes
+    notify: Start docker on boot
+    tags:
+      - docker
+
+  # sudo groupadd docker
+  - name: Create "docker" group
+    group:
+      name: "{{ docker_group }}"
+      state: present
+    tags:
+      - docker
+
+  # sudo usermod -aG docker ubuntu
+  - name: Add remote "ubuntu" user to "docker" group
+    user:
+      name: "{{ remote_user }}"
+      group: docker
+      append: yes
+    tags:
+      - docker
+
+  # sudo apt-get install docker-compose=1.8.*
+  - name: Install docker-compose
+    apt:
+      name: docker-compose
+      state: present
+      update_cache: yes
+    tags:
+      - docker
+
+  - name: Start docker on boot
+  systemd:
+    name: docker
+    state: started
+    enabled: yes
+
+#---------------
+
+    # sudo apt-get autoclean
+  - name: Remove useless apt packages from the cache
+    apt:
+      autoclean: yes
+    tags:
+      - system
+   
+  # sudo apt-get autoremove
+  - name: Remove dependencies that are no longer required
+    apt:
+      autoremove: yes
+    tags:
+      - system
