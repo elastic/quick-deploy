@@ -61,7 +61,7 @@
   - name: Install docker
     apt:
       name: docker-ce
-      state: present
+      state: latest
       update_cache: yes
     notify: Start docker on boot
     tags:
@@ -76,7 +76,7 @@
       - docker
 
   # sudo usermod -aG docker ubuntu
-  - name: Add remote "ubuntu" user to "docker" group
+  - name: Add remote user to "docker" group
     user:
       name: "{{user}}"
       group: docker
@@ -84,11 +84,11 @@
     tags:
       - docker
 
-  # sudo apt-get install docker-compose=1.8.*
+  # sudo apt-get install docker-compose
   - name: Install docker-compose
     apt:
       name: docker-compose
-      state: present
+      state: latest
       update_cache: yes
     tags:
       - docker
