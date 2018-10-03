@@ -1,5 +1,7 @@
 # quick-deploy
 
+## Get running in 2 mins!
+
 ### Provides a very easy and simple way to deploy Elastic Search and Kibana.
 
 _**NOTE: CURRENTLY ONLY WORKS ON UBUNTU**_
