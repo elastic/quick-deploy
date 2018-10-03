@@ -37,5 +37,5 @@ services:
     networks: ['stack']
 
 networks:
-  sa-demo-net:
+  stack:
     driver: bridge
