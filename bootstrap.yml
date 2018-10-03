@@ -70,15 +70,20 @@
   # sudo groupadd docker
   - name: Create "docker" group
     group:
-      name: "{{ docker_group }}"
+      name: "docker"
       state: present
     tags:
       - docker
 
+  # Get current user
+  - name: Get current user
+    shell: whoami
+    register: current_user
+
   # sudo usermod -aG docker ubuntu
   - name: Add remote "ubuntu" user to "docker" group
     user:
-      name: "{{ remote_user }}"
+      name: "{{current_user}}"
       group: docker
       append: yes
     tags:
