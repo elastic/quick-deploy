@@ -90,6 +90,13 @@
     tags:
       - docker
 
+  - name: Ensure docker-compose is executible
+    file:
+      path: /usr/local/bin/docker-compose
+      owner: root
+      group: docker
+      mode: 0755
+
   # sudo apt-get install docker-compose
   # - name: Install docker-compose
   #   apt:
