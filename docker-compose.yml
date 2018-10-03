@@ -8,9 +8,9 @@ services:
       - "ES_JAVA_OPTS=-Xms4g -Xmx4g"
       - bootstrap.memory_lock=true
       - discovery.type=single-node
-      - ELASTIC_PASSWORD=${ES_PASSWORD:-changeme}
+      - ELASTIC_PASSWORD=${ES_PASSWORD}
     ports: ['9200:9200']
-    networks: ['stack']
+    networks: ['es-stack']
     ulimits:
       memlock:
         soft: -1
@@ -31,12 +31,12 @@ services:
       - elasticsearch
     environment:
       SERVER_HOST: "0.0.0.0"
-      ELASTICSEARCH_URL: "http://es:9200"
+      ELASTICSEARCH_URL: "http://es-stack:9200"
       ELASTICSEARCH_USERNAME: "elastic"
-      ELASTICSEARCH_PASSWORD: ${SA_DEMO_ES_PASSWORD:-changeme}
+      ELASTICSEARCH_PASSWORD: ${KB_PASSWORD}
     ports: [ '5601:5601' ]
-    networks: ['stack']
+    networks: ['es-stack']
 
 networks:
-  stack:
+  es-stack:
     driver: bridge
