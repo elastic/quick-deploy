@@ -97,7 +97,7 @@
       group: docker
       mode: 0755
 
-  # sudo apt-get install docker-compose
+  # This method of installing docker-compose doesn't actually get the latest version (sudo apt-get install docker-compose)
   # - name: Install docker-compose
   #   apt:
   #     name: "docker-compose={{docker_compose_version}}"
