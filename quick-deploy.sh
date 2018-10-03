@@ -1,6 +1,11 @@
 #!/bin/bash -e
 
 #-------------------------
+# GET A PASSWORD
+#-------------------------
+read -p "Enter a password for logging into Elasticsearch and Kibana: " ES_PASSWORD
+
+#-------------------------
 # BOOTSTRAP ANSIBLE
 #-------------------------
 sudo apt-get update && sudo apt-get install software-properties-common -y
