@@ -4,7 +4,7 @@
 # GET A PASSWORD
 #-------------------------
 read -p "Enter a password for logging into Elasticsearch and Kibana: " ELASTIC_PASSWORD
-echo "Setting... $ES_PASSWORD"
+echo "Setting... $ELASTIC_PASSWORD"
 
 #-------------------------
 # BOOTSTRAP ANSIBLE
