@@ -84,14 +84,20 @@
     tags:
       - docker
 
-  # sudo apt-get install docker-compose=1.8.*
+  # install latest version of docker-compose
   - name: Install docker-compose
-    apt:
-      name: "docker-compose={{docker_compose_version}}"
-      state: present
-      update_cache: yes
+    shell: "sudo curl -L https://github.com/docker/compose/releases/download/{{DOCKER_COMPOSE_VERSION}}/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose"
     tags:
       - docker
+
+  # sudo apt-get install docker-compose
+  # - name: Install docker-compose
+  #   apt:
+  #     name: "docker-compose={{docker_compose_version}}"
+  #     state: present
+  #     update_cache: yes
+  #   tags:
+  #     - docker
 
   - name: Start docker on boot
     systemd:
