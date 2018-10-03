@@ -3,7 +3,7 @@
 #-------------------------
 # GET A PASSWORD
 #-------------------------
-read -ps "Enter a password for logging into Elasticsearch and Kibana: " ELASTIC_PASSWORD
+read -p "Enter a password for logging into Elasticsearch and Kibana: " -s ELASTIC_PASSWORD
 export ES_PASSWORD=$ELASTIC_PASSWORD
 
 #-------------------------
