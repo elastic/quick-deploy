@@ -3,8 +3,8 @@
 #-------------------------
 # GET A PASSWORD
 #-------------------------
-read -p "Enter a password for logging into Elasticsearch and Kibana: " ELASTIC_PASSWORD
-export ELASTIC_PASSWORD=$ELASTIC_PASSWORD
+read -ps "Enter a password for logging into Elasticsearch and Kibana: " ELASTIC_PASSWORD
+export ES_PASSWORD=$ELASTIC_PASSWORD
 
 #-------------------------
 # BOOTSTRAP ANSIBLE
