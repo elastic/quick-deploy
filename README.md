@@ -17,7 +17,7 @@ Starts dockerized instances of:
 ### Debian
 
 1. Clone this repo onto the machine on which you wish to run Elasticsearch
-    - `git clone git@github.com:EthanStrider/quick-deploy.git`
+    - `git git@github.com:elastic/quick-deploy.git`
 2. Navigate into the repo you just cloned
     - `cd quick-deploy`
 3. Run the shell script
